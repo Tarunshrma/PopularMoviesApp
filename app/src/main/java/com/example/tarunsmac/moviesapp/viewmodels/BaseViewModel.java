@@ -1,0 +1,33 @@
+package com.example.tarunsmac.moviesapp.viewmodels;
+
+import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModel;
+
+import com.example.tarunsmac.moviesapp.models.MovieResponse;
+import com.example.tarunsmac.moviesapp.services.interfaces.MovieServiceResponseHandler;
+
+
+/**
+ * Created by tarunsmac on 10/03/18.
+ */
+
+public class BaseViewModel extends ViewModel implements MovieServiceResponseHandler{
+
+    protected MutableLiveData<Boolean> isLoading;
+
+    protected MutableLiveData<MovieResponse> apiResponse;
+
+    protected MutableLiveData<Throwable> apiError;
+
+    @Override
+    public void notifySuccess(MovieResponse response) {
+        this.isLoading.setValue(false);
+        this.apiResponse.setValue(response);
+    }
+
+    @Override
+    public void notifyError(Throwable error) {
+        this.isLoading.setValue(false);
+        this.apiError.setValue(error);
+    }
+}

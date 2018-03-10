@@ -1,6 +1,7 @@
 package com.example.tarunsmac.moviesapp.viewmodels;
 
 import com.example.tarunsmac.moviesapp.enums.MovieFilters;
+import com.example.tarunsmac.moviesapp.services.implementation.MovieServiceImpl;
 import com.example.tarunsmac.moviesapp.services.interfaces.MovieService;
 
 import javax.inject.Inject;
@@ -11,12 +12,13 @@ import javax.inject.Inject;
 
 public class MovieListViewModel extends BaseViewModel {
 
+
     private MovieService apiService;
 
     //Constructor injection for api service.
-    @Inject
-    public MovieListViewModel(MovieService _apiService){
-        this.apiService = _apiService;
+    public MovieListViewModel(){
+        //TODO: Service should be injected... Construcot injection was not working with Dagger
+        this.apiService = new MovieServiceImpl();
     }
 
     public void fetchMovies(MovieFilters filter){

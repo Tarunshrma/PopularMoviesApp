@@ -18,9 +18,11 @@ import retrofit2.Retrofit;
 
 public class MovieServiceImpl extends BaseMovieService implements MovieService {
 
+
+
     public void getMovies(MovieFilters filter, final MovieServiceResponseHandler responseHandler) {
 
-        Call<MovieResponse> call = service.getTopRatedMovies(Constants.API_KEY);
+        Call<MovieResponse> call = this.getMovieService().getTopRatedMovies(Constants.API_KEY);
 
         call.enqueue(new Callback<MovieResponse>() {
             @Override

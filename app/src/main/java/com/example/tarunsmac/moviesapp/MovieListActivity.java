@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.tarunsmac.moviesapp.enums.MovieFilters;
@@ -22,8 +24,12 @@ import java.util.List;
 public class MovieListActivity extends BaseActivity {
 
     private static final String TAG = "MovieListActivity";
+
+
     private RecyclerView rvMovieList;
-    MovieListGridAdapter gridAdapter;
+    private MovieListGridAdapter gridAdapter;
+
+    private ProgressBar pbLoadngIndicator;
 
     protected MovieListViewModel viewModel;
 
@@ -31,6 +37,8 @@ public class MovieListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_list);
+
+        pbLoadngIndicator = findViewById(R.id.pb_loading_indicator);
 
         rvMovieList = findViewById(R.id.rv_movies);
         GridLayoutManager gridLayout = new GridLayoutManager(this,2);
@@ -44,6 +52,8 @@ public class MovieListActivity extends BaseActivity {
         viewModel = ViewModelProviders.of(this).get(MovieListViewModel.class);
         bindView();
         viewModel.fetchMovies(MovieFilters.Popular);
+
+        showLoadingIndicator();
     }
 
     void bindView() {
@@ -51,6 +61,7 @@ public class MovieListActivity extends BaseActivity {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
                 Log.i(TAG,"IsLoading Changed");
+                hideLoadingIndicator();
             }
         });
 
@@ -70,4 +81,15 @@ public class MovieListActivity extends BaseActivity {
             }
         });
     }
+
+    private void showLoadingIndicator()
+    {
+        pbLoadngIndicator.setVisibility(View.VISIBLE);
+    }
+
+    private void hideLoadingIndicator()
+    {
+        pbLoadngIndicator.setVisibility(View.INVISIBLE);
+    }
+
 }

@@ -7,16 +7,14 @@
     android:layout_height="wrap_content"
     card_view:cardElevation="7dp"
     card_view:contentPadding="7dp"
-    card_view:cardCornerRadius="7dp"
+    card_view:cardCornerRadius="2dp"
     card_view:cardMaxElevation="7dp"
+    android:background="@color/cardview_dark_background"
     >
-    <TextView
-        android:id="@+id/tv_movie_title"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="10dp"
-        android:padding="10dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:id="@+id/img_movie_poster"
+        android:background="@color/cardview_dark_background"/>
 </android.support.v7.widget.CardView>

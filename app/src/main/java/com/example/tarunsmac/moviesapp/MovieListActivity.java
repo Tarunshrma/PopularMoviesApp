@@ -30,7 +30,6 @@ public class MovieListActivity extends BaseActivity {
     private MovieListGridAdapter gridAdapter;
 
     private ProgressBar pbLoadngIndicator;
-
     protected MovieListViewModel viewModel;
 
     @Override

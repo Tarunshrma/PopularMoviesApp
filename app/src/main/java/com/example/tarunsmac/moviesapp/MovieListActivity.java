@@ -44,7 +44,7 @@ public class MovieListActivity extends BaseActivity {
         GridLayoutManager gridLayout = new GridLayoutManager(this,2);
         rvMovieList.setLayoutManager(gridLayout);
 
-        gridAdapter = new MovieListGridAdapter();
+        gridAdapter = new MovieListGridAdapter(this);
         rvMovieList.setAdapter(gridAdapter);
 
         rvMovieList.setHasFixedSize(true);

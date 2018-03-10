@@ -1,5 +1,6 @@
 package com.example.tarunsmac.moviesapp.models;
 
+import com.example.tarunsmac.moviesapp.helpers.Constants;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -84,5 +85,9 @@ public class Movies {
 
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public String fullImagePath(){
+        return Constants.IMAGE_BASE_URL + Constants.DEFAULT_IMAGE_SIZE + "/" + this.posterPath;
     }
 }

@@ -31,7 +31,7 @@ public class MovieListActivity extends BaseActivity {
 
     private ProgressBar pbLoadngIndicator;
     protected MovieListViewModel viewModel;
-    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

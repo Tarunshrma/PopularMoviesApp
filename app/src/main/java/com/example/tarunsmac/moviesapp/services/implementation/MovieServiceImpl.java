@@ -22,7 +22,13 @@ public class MovieServiceImpl extends BaseMovieService implements MovieService {
 
     public void getMovies(MovieFilters filter, final MovieServiceResponseHandler responseHandler) {
 
-        Call<MovieResponse> call = this.getMovieService().getTopRatedMovies(Constants.API_KEY);
+        Call<MovieResponse> call;
+
+        if (filter == MovieFilters.Top_Rated){
+            call = this.getMovieService().getTopRatedMovies(Constants.API_KEY);
+        }else{
+            call = this.getMovieService().getMostPopularMovies(Constants.API_KEY);
+        }
 
         call.enqueue(new Callback<MovieResponse>() {
             @Override

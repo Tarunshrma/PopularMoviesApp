@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#419388"
+            android:id="@+id/movie_header">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#419388"
+                android:text="<MOVIE_TITLE>"
+                android:textColor="#ffffff"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginLeft="25dp"
+                android:id="@+id/tv_movie_title"
+                />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/img_movie_poster"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@id/movie_header"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:adjustViewBounds="true"
+            android:cropToPadding="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_movie_release_date"
+        android:layout_below="@id/movie_header"
+        android:layout_toEndOf="@id/img_movie_poster"
+        android:layout_alignTop="@id/img_movie_poster"
+        android:layout_marginLeft="25dp"
+        android:textSize="22dp"
+        android:textColor="#959595"
+        android:text="<RELEASE_DATE>"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_movie_rating"
+        android:layout_below="@id/tv_movie_release_date"
+        android:layout_alignLeft="@id/tv_movie_release_date"
+        android:layout_marginTop="5dp"
+        android:textSize="10dp"
+        android:textColor="#000000"
+        android:text="<RATING>"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_movie_description"
+        android:layout_alignLeft="@id/img_movie_poster"
+        android:layout_below="@id/img_movie_poster"
+        android:layout_marginTop="20dp"
+        android:text="<MOVIE DESCRIPTION>"/>
+
+
+    </RelativeLayout>

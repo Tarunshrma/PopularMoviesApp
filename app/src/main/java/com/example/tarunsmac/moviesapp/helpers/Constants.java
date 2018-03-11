@@ -14,4 +14,6 @@ public final class Constants {
 
     public static final String API_KEY = YOUR_API_KEY;
 
+    public static final String SELECTED_MOVIE_EXTRA_KEY = "selectedMovie";
+
 }

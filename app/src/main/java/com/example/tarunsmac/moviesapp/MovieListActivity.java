@@ -2,6 +2,7 @@ package com.example.tarunsmac.moviesapp;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.tarunsmac.moviesapp.enums.MovieFilters;
+import com.example.tarunsmac.moviesapp.helpers.Constants;
 import com.example.tarunsmac.moviesapp.models.MovieResponse;
 import com.example.tarunsmac.moviesapp.models.Movies;
 import com.example.tarunsmac.moviesapp.viewmodels.BaseViewModel;
@@ -38,8 +40,16 @@ public class MovieListActivity extends BaseActivity implements MovieListGridAdap
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_list);
 
-        pbLoadngIndicator = findViewById(R.id.pb_loading_indicator);
+        //Load the UI component and Bind with view models
+        setupUI();
 
+        //Display loading indicator
+        showLoadingIndicator();
+    }
+
+    private void setupUI(){
+
+        pbLoadngIndicator = findViewById(R.id.pb_loading_indicator);
         rvMovieList = findViewById(R.id.rv_movies);
         GridLayoutManager gridLayout = new GridLayoutManager(this,2);
         rvMovieList.setLayoutManager(gridLayout);
@@ -52,11 +62,9 @@ public class MovieListActivity extends BaseActivity implements MovieListGridAdap
         viewModel = ViewModelProviders.of(this).get(MovieListViewModel.class);
         bindView();
         viewModel.fetchMovies(MovieFilters.Popular);
-
-        showLoadingIndicator();
     }
 
-    void bindView() {
+    private void bindView() {
         viewModel.isLoading.observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
@@ -94,6 +102,8 @@ public class MovieListActivity extends BaseActivity implements MovieListGridAdap
 
     @Override
     public void onItemClicked(Movies selectedMovie) {
-        Toast.makeText(this,selectedMovie.getMovieTitle(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this,MovieDetailActivity.class);
+        intent.putExtra(Constants.SELECTED_MOVIE_EXTRA_KEY,selectedMovie);
+        this.startActivity(intent);
     }
 }

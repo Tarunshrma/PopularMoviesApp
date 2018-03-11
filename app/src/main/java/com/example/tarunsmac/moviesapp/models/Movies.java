@@ -1,13 +1,26 @@
 package com.example.tarunsmac.moviesapp.models;
 
+import android.os.Parcel;
+import android.os.ParcelFormatException;
+import android.os.Parcelable;
+
 import com.example.tarunsmac.moviesapp.helpers.Constants;
+import com.example.tarunsmac.moviesapp.helpers.DateUtils;
 import com.google.gson.annotations.SerializedName;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 /**
  * Created by tarunsmac on 10/03/18.
  */
 
-public class Movies {
+public class Movies implements Parcelable{
 
     @SerializedName("title")
     private String movieTitle;
@@ -38,6 +51,27 @@ public class Movies {
         this.releaseDate = releaseDate;
     }
 
+
+    protected Movies(Parcel in) {
+        movieTitle = in.readString();
+        originalTitle = in.readString();
+        posterPath = in.readString();
+        description = in.readString();
+        rating = in.readString();
+        releaseDate = in.readString();
+    }
+
+    public static final Creator<Movies> CREATOR = new Creator<Movies>() {
+        @Override
+        public Movies createFromParcel(Parcel in) {
+            return new Movies(in);
+        }
+
+        @Override
+        public Movies[] newArray(int size) {
+            return new Movies[size];
+        }
+    };
 
     public String getMovieTitle() {
         return movieTitle;
@@ -83,11 +117,36 @@ public class Movies {
         return releaseDate;
     }
 
+    public String getReleaseYear()  {
+        //As date is in format of
+        try{
+            int year = DateUtils.getYear(releaseDate,"yyyy-mm-dd");
+            return String.valueOf(year);
+        } catch (ParseException e) {
+            return releaseDate;
+        }
+    }
+
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
 
     public String fullImagePath(){
         return Constants.IMAGE_BASE_URL + Constants.DEFAULT_IMAGE_SIZE + "/" + this.posterPath;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(movieTitle);
+        dest.writeString(originalTitle);
+        dest.writeString(posterPath);
+        dest.writeString(description);
+        dest.writeString(rating);
+        dest.writeString(releaseDate);
     }
 }

@@ -3,29 +3,33 @@ package com.example.tarunsmac.moviesapp;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.tarunsmac.moviesapp.enums.MovieFilters;
 import com.example.tarunsmac.moviesapp.helpers.Constants;
 import com.example.tarunsmac.moviesapp.models.MovieResponse;
 import com.example.tarunsmac.moviesapp.models.Movies;
-import com.example.tarunsmac.moviesapp.viewmodels.BaseViewModel;
 import com.example.tarunsmac.moviesapp.viewmodels.MovieListViewModel;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MovieListActivity extends BaseActivity implements MovieListGridAdapter.MovieListGridAdapterAdapterOnClickHandler {
+public class MovieListActivity extends BaseActivity implements MovieListGridAdapter.MovieListGridAdapterAdapterOnClickHandler{
 
     private static final String TAG = "MovieListActivity";
+    private static final String[] filters = {"Most Populer", "Top Rated"};
+    private MovieFilters currentFilter = MovieFilters.Popular;
 
 
     private RecyclerView rvMovieList;
@@ -43,8 +47,52 @@ public class MovieListActivity extends BaseActivity implements MovieListGridAdap
         //Load the UI component and Bind with view models
         setupUI();
 
-        //Display loading indicator
-        showLoadingIndicator();
+        //Fetch movie data
+        fetchMovieDataFrom();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.home_menu,menu);
+
+        MenuItem menuItem = menu.findItem(R.id.home_menu);
+        Spinner spinner = (Spinner) menuItem.getActionView();
+
+        ArrayAdapter<String>spinnerAdapter = new ArrayAdapter<String>(MovieListActivity.this,
+                android.R.layout.simple_spinner_item,filters);
+
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(spinnerAdapter);
+
+        spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+
+                switch (position){
+                    case 0:
+                        currentFilter = MovieFilters.Popular;
+                        break;
+                    case 1:
+                        currentFilter = MovieFilters.Top_Rated;
+                        break;
+                }
+
+                fetchMovieDataFrom();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
+            }
+        });
+
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     private void setupUI(){
@@ -61,7 +109,12 @@ public class MovieListActivity extends BaseActivity implements MovieListGridAdap
 
         viewModel = ViewModelProviders.of(this).get(MovieListViewModel.class);
         bindView();
-        viewModel.fetchMovies(MovieFilters.Popular);
+
+    }
+
+    private void fetchMovieDataFrom(){
+        showLoadingIndicator();
+        viewModel.fetchMovies(currentFilter);
     }
 
     private void bindView() {
@@ -93,11 +146,13 @@ public class MovieListActivity extends BaseActivity implements MovieListGridAdap
     private void showLoadingIndicator()
     {
         pbLoadngIndicator.setVisibility(View.VISIBLE);
+        rvMovieList.setVisibility(View.INVISIBLE);
     }
 
     private void hideLoadingIndicator()
     {
         pbLoadngIndicator.setVisibility(View.INVISIBLE);
+        rvMovieList.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -106,4 +161,5 @@ public class MovieListActivity extends BaseActivity implements MovieListGridAdap
         intent.putExtra(Constants.SELECTED_MOVIE_EXTRA_KEY,selectedMovie);
         this.startActivity(intent);
     }
+
 }

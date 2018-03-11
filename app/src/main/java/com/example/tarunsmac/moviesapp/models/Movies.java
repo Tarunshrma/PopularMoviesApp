@@ -118,7 +118,6 @@ public class Movies implements Parcelable{
     }
 
     public String getReleaseYear()  {
-        //As date is in format of
         try{
             int year = DateUtils.getYear(releaseDate,"yyyy-mm-dd");
             return String.valueOf(year);

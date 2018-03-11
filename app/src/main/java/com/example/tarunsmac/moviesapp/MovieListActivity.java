@@ -21,7 +21,7 @@ import com.example.tarunsmac.moviesapp.viewmodels.MovieListViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieListActivity extends BaseActivity {
+public class MovieListActivity extends BaseActivity implements MovieListGridAdapter.MovieListGridAdapterAdapterOnClickHandler {
 
     private static final String TAG = "MovieListActivity";
 
@@ -44,7 +44,7 @@ public class MovieListActivity extends BaseActivity {
         GridLayoutManager gridLayout = new GridLayoutManager(this,2);
         rvMovieList.setLayoutManager(gridLayout);
 
-        gridAdapter = new MovieListGridAdapter(this);
+        gridAdapter = new MovieListGridAdapter(this,this);
         rvMovieList.setAdapter(gridAdapter);
 
         rvMovieList.setHasFixedSize(true);
@@ -92,4 +92,8 @@ public class MovieListActivity extends BaseActivity {
         pbLoadngIndicator.setVisibility(View.INVISIBLE);
     }
 
+    @Override
+    public void onItemClicked(Movies selectedMovie) {
+        Toast.makeText(this,selectedMovie.getMovieTitle(), Toast.LENGTH_SHORT).show();
+    }
 }

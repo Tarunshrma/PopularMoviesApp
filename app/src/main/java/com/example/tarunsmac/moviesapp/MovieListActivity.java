@@ -48,7 +48,7 @@ public class MovieListActivity extends BaseActivity implements MovieListGridAdap
         setupUI();
 
         //Fetch movie data
-        fetchMovieDataFrom();
+        fetchMovieData();
     }
 
     @Override
@@ -81,7 +81,7 @@ public class MovieListActivity extends BaseActivity implements MovieListGridAdap
                         break;
                 }
 
-                fetchMovieDataFrom();
+                fetchMovieData();
 
             }
 
@@ -112,7 +112,7 @@ public class MovieListActivity extends BaseActivity implements MovieListGridAdap
 
     }
 
-    private void fetchMovieDataFrom(){
+    private void fetchMovieData(){
         showLoadingIndicator();
         viewModel.fetchMovies(currentFilter);
     }

@@ -1,6 +1,9 @@
 # PopularMoviesApp
 Udacity nanodegree project for learning Android.
 
+NOTE:
+To run the app provide application with MovieDB API KEY. Replace API_KEY constant in Constant.java file.
+
 Liberaies Used:
 1) Dagger 2
 2) RatroFit

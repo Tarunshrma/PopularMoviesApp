@@ -17,6 +17,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tarunsmac.moviesapp.enums.MovieFilters;
@@ -34,13 +35,13 @@ public class MovieListActivity extends BaseActivity implements MovieListGridAdap
 
     private RecyclerView rvMovieList;
     private MovieListGridAdapter gridAdapter;
-
+    private TextView tvNetworkError;
     private ProgressBar pbLoadngIndicator;
     protected MovieListViewModel viewModel;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_list);
 
@@ -98,6 +99,7 @@ public class MovieListActivity extends BaseActivity implements MovieListGridAdap
 
         pbLoadngIndicator = findViewById(R.id.pb_loading_indicator);
         rvMovieList = findViewById(R.id.rv_movies);
+        tvNetworkError = findViewById(R.id.tv_network_error);
         GridLayoutManager gridLayout = new GridLayoutManager(this,2);
         rvMovieList.setLayoutManager(gridLayout);
 
@@ -128,8 +130,8 @@ public class MovieListActivity extends BaseActivity implements MovieListGridAdap
         viewModel.apiError.observe(this, new Observer<Throwable>() {
             @Override
             public void onChanged(@Nullable Throwable throwable) {
-                Log.e(TAG,"Error in api" + throwable.getMessage());
-                Toast.makeText(getParent(),throwable.getLocalizedMessage().toString(),Toast.LENGTH_SHORT).show();
+                   Log.e(TAG,"Error in api" + throwable.getMessage());
+                   //Toast.makeText(getParent(),throwable.getLocalizedMessage().toString(),Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -144,6 +146,7 @@ public class MovieListActivity extends BaseActivity implements MovieListGridAdap
 
     private void showLoadingIndicator()
     {
+        tvNetworkError.setVisibility(View.INVISIBLE);
         pbLoadngIndicator.setVisibility(View.VISIBLE);
         rvMovieList.setVisibility(View.INVISIBLE);
     }
@@ -152,6 +155,18 @@ public class MovieListActivity extends BaseActivity implements MovieListGridAdap
     {
         pbLoadngIndicator.setVisibility(View.INVISIBLE);
         rvMovieList.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onInternetUnavailable() {
+        super.onInternetUnavailable();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                rvMovieList.setVisibility(View.INVISIBLE);
+                tvNetworkError.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     @Override

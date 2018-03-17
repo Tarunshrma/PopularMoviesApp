@@ -17,4 +17,13 @@
             android:layout_width="42dp"
             android:layout_gravity="center"
             android:visibility="invisible" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_network_error"
+        android:text="@string/network_error"
+        android:textColor="@color/colorTitleTextColor"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        android:layout_gravity="center"/>
     </FrameLayout>

@@ -27,7 +27,7 @@ public class BaseViewModel extends ViewModel implements MovieServiceResponseHand
 
     @Override
     public void notifyError(Throwable error) {
-        this.isLoading.setValue(false);
         this.apiError.setValue(error);
+        this.isLoading.setValue(false);
     }
 }

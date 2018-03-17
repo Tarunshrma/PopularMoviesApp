@@ -82,7 +82,6 @@ public class MovieListActivity extends BaseActivity implements MovieListGridAdap
                 }
 
                 fetchMovieData();
-
             }
 
             @Override

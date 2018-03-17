@@ -1,17 +1,13 @@
 package com.example.tarunsmac.moviesapp;
 
 import android.content.Context;
-import android.graphics.Movie;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.example.tarunsmac.moviesapp.enums.MovieFilters;
 import com.example.tarunsmac.moviesapp.models.Movies;
-import com.example.tarunsmac.moviesapp.services.interfaces.MovieServiceResponseHandler;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -26,9 +22,9 @@ import java.util.List;
 public class MovieListGridAdapter extends RecyclerView.Adapter<MovieListGridAdapter.ViewHolder>{
 
     private List<Movies> movies;
-    private Context context;
+    private final Context context;
 
-    private MovieListGridAdapterAdapterOnClickHandler _mClickHandler;
+    private final MovieListGridAdapterAdapterOnClickHandler _mClickHandler;
 
     public interface MovieListGridAdapterAdapterOnClickHandler {
         void onItemClicked(Movies selectedMovie);
@@ -45,8 +41,7 @@ public class MovieListGridAdapter extends RecyclerView.Adapter<MovieListGridAdap
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View gridItem = inflater.inflate(R.layout.recyclerview_item,parent,false);
 
-        ViewHolder viewHolder = new ViewHolder(gridItem);
-        return viewHolder;
+        return new ViewHolder(gridItem);
     }
 
     @Override
@@ -67,12 +62,12 @@ public class MovieListGridAdapter extends RecyclerView.Adapter<MovieListGridAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private ImageView imgPoster;
+        private final ImageView imgPoster;
 
         public ViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
-            imgPoster = (ImageView) itemView.findViewById(R.id.img_movie_poster);
+            imgPoster = itemView.findViewById(R.id.img_movie_poster);
         }
 
 

@@ -4,8 +4,6 @@ import com.example.tarunsmac.moviesapp.enums.MovieFilters;
 import com.example.tarunsmac.moviesapp.services.implementation.MovieServiceImpl;
 import com.example.tarunsmac.moviesapp.services.interfaces.MovieService;
 
-import javax.inject.Inject;
-
 /**
  * Created by tarunsmac on 10/03/18.
  */
@@ -13,7 +11,7 @@ import javax.inject.Inject;
 public class MovieListViewModel extends BaseViewModel {
 
 
-    private MovieService apiService;
+    private final MovieService apiService;
 
     //Constructor injection for api service.
     public MovieListViewModel(){

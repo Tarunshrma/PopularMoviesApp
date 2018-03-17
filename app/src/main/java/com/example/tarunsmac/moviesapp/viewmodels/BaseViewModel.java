@@ -13,11 +13,11 @@ import com.example.tarunsmac.moviesapp.services.interfaces.MovieServiceResponseH
 
 public class BaseViewModel extends ViewModel implements MovieServiceResponseHandler{
 
-    public MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
+    public final MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
 
-    public MutableLiveData<MovieResponse> apiResponse = new MutableLiveData<>();
+    public final MutableLiveData<MovieResponse> apiResponse = new MutableLiveData<>();
 
-    public MutableLiveData<Throwable> apiError = new MutableLiveData<>();
+    public final MutableLiveData<Throwable> apiError = new MutableLiveData<>();
 
     @Override
     public void notifySuccess(MovieResponse response) {

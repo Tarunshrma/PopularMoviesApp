@@ -1,9 +1,7 @@
 package com.example.tarunsmac.moviesapp;
 
-import android.arch.lifecycle.LifecycleRegistry;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 import com.example.tarunsmac.moviesapp.services.interfaces.InternetConnectionListener;
 

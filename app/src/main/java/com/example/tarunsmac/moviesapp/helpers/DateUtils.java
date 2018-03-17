@@ -20,9 +20,8 @@ public final class  DateUtils {
 
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(date);
-        int year = calendar.get(Calendar.YEAR);
 
-        return year;
+        return calendar.get(Calendar.YEAR);
     }
 
 }

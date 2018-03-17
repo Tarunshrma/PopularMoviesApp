@@ -33,7 +33,7 @@
             android:layout_marginTop="10dp"
             android:adjustViewBounds="true"
             android:cropToPadding="true"
-            />
+            android:contentDescription="@string/image_poster_alt" />
 
     <TextView
         android:layout_width="wrap_content"

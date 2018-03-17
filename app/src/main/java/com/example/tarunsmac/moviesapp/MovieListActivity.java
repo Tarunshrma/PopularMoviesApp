@@ -18,7 +18,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.tarunsmac.moviesapp.enums.MovieFilters;
 import com.example.tarunsmac.moviesapp.helpers.Constants;
@@ -61,8 +60,8 @@ public class MovieListActivity extends BaseActivity implements MovieListGridAdap
         MenuItem menuItem = menu.findItem(R.id.home_menu);
         Spinner spinner = (Spinner) menuItem.getActionView();
 
-        ArrayAdapter<String>spinnerAdapter = new ArrayAdapter<String>(MovieListActivity.this,
-                android.R.layout.simple_spinner_item,filters);
+        ArrayAdapter<String>spinnerAdapter = new ArrayAdapter<>(MovieListActivity.this,
+                android.R.layout.simple_spinner_item, filters);
 
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 

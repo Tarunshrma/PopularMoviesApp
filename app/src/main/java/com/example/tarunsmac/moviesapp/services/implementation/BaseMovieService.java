@@ -14,11 +14,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by tarunsmac on 10/03/18.
  */
 
-public class BaseMovieService {
+class BaseMovieService {
 
-    private MovieApi service;
+    final MovieApi service;
 
-    protected MovieApi getMovieService(){
+
+    BaseMovieService(){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .client(provideOkHttpClient())
@@ -26,7 +27,6 @@ public class BaseMovieService {
                 .build();
 
         service = retrofit.create(MovieApi.class);
-        return service;
     }
 
     private OkHttpClient provideOkHttpClient() {

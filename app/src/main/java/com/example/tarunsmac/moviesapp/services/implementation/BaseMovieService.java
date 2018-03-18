@@ -1,6 +1,7 @@
 package com.example.tarunsmac.moviesapp.services.implementation;
 
 import com.example.tarunsmac.moviesapp.App;
+import com.example.tarunsmac.moviesapp.BuildConfig;
 import com.example.tarunsmac.moviesapp.helpers.Constants;
 import com.example.tarunsmac.moviesapp.services.interfaces.MovieApi;
 
@@ -17,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 class BaseMovieService {
 
     final MovieApi service;
-
+    final String movieApiKey;
 
     BaseMovieService(){
         Retrofit retrofit = new Retrofit.Builder()
@@ -27,6 +28,7 @@ class BaseMovieService {
                 .build();
 
         service = retrofit.create(MovieApi.class);
+        movieApiKey = BuildConfig.MY_MOVIE_DB_API_KEY;;
     }
 
     private OkHttpClient provideOkHttpClient() {

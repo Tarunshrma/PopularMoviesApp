@@ -28,9 +28,9 @@ public class MovieServiceImpl extends BaseMovieService implements MovieService {
         Call<MovieResponse> call;
 
         if (filter == MovieFilters.Top_Rated){
-            call = this.service.getTopRatedMovies(Constants.API_KEY);
+            call = this.service.getTopRatedMovies(this.movieApiKey);
         }else{
-            call = this.service.getMostPopularMovies(Constants.API_KEY);
+            call = this.service.getMostPopularMovies(this.movieApiKey);
         }
 
         call.enqueue(new Callback<MovieResponse>() {

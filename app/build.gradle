@@ -18,7 +18,7 @@ android {
     }
 
     buildTypes.each{
-        it.buildConfigField 'String', 'MY_MOVIE_DB_API_KEY', PopulerMoviesAPIKey
+        it.buildConfigField 'String', 'MY_MOVIE_DB_API_KEY', '${System.env.API_KEY}'
     }
 }
 

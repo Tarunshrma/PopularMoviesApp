@@ -25,6 +25,13 @@ import com.example.tarunsmac.moviesapp.models.MovieResponse;
 import com.example.tarunsmac.moviesapp.models.Movies;
 import com.example.tarunsmac.moviesapp.viewmodels.MovieListViewModel;
 
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.analytics.Analytics;
+import com.microsoft.appcenter.crashes.Crashes;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class MovieListActivity extends BaseActivity implements MovieListGridAdapter.MovieListGridAdapterAdapterOnClickHandler{
 
     private static final String TAG = "MovieListActivity";
@@ -43,6 +50,8 @@ public class MovieListActivity extends BaseActivity implements MovieListGridAdap
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_list);
+
+        AppCenter.start(getApplication(), VS_API_SECRET, Analytics.class, Crashes.class);
 
         //Load the UI component and Bind with view models
         setupUI();
@@ -170,6 +179,12 @@ public class MovieListActivity extends BaseActivity implements MovieListGridAdap
 
     @Override
     public void onItemClicked(Movies selectedMovie) {
+
+        Map<String, String> properties = new HashMap<>();
+        properties.put("MovieName", selectedMovie.getMovieTitle());
+
+        Analytics.trackEvent("Video clicked", properties);
+
         Intent intent = new Intent(this,MovieDetailActivity.class);
         intent.putExtra(Constants.SELECTED_MOVIE_EXTRA_KEY,selectedMovie);
         this.startActivity(intent);

@@ -28,7 +28,7 @@ class BaseMovieService {
                 .build();
 
         service = retrofit.create(MovieApi.class);
-        movieApiKey = BuildConfig.MY_MOVIE_DB_API_KEY;;
+        movieApiKey = YOUR_API_KEY;//BuildConfig.MY_MOVIE_DB_API_KEY;;
     }
 
     private OkHttpClient provideOkHttpClient() {

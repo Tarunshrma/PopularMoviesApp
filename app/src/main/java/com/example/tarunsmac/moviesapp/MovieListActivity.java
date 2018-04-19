@@ -87,9 +87,20 @@ public class MovieListActivity extends BaseActivity implements MovieListGridAdap
                         break;
                     case 1:
                         currentFilter = MovieFilters.Top_Rated;
-                        throw new RuntimeException("This is a crash");
-                        break;
 
+                        //break;
+
+                }
+
+                String appliedFilter = currentFilter == MovieFilters.Top_Rated ? "Top Rated" : "Popular";
+                Map<String, String> properties = new HashMap<>();
+                properties.put("MovieName",appliedFilter );
+
+                Analytics.trackEvent("Filter Applied", properties);
+
+                if (currentFilter == MovieFilters.Top_Rated)
+                {
+                    throw new RuntimeException("This is a crash");
                 }
 
                 fetchMovieData();

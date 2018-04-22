@@ -96,11 +96,12 @@ public class MovieListActivity extends BaseActivity implements MovieListGridAdap
                 Map<String, String> properties = new HashMap<>();
                 properties.put("MovieName",appliedFilter );
 
+                //TODO: Should create analytics service and inject it or resolve it to track the event.
                 Analytics.trackEvent("Filter Applied", properties);
 
                 if (currentFilter == MovieFilters.Top_Rated)
                 {
-                    throw new RuntimeException("This is a crash");
+                    //throw new RuntimeException("This is a crash");
                 }
 
                 fetchMovieData();
@@ -193,6 +194,7 @@ public class MovieListActivity extends BaseActivity implements MovieListGridAdap
     @Override
     public void onItemClicked(Movies selectedMovie) {
 
+        //TODO: Should create analytics service and inject it or resolve it to track the event.
         Map<String, String> properties = new HashMap<>();
         properties.put("MovieName", selectedMovie.getMovieTitle());
 

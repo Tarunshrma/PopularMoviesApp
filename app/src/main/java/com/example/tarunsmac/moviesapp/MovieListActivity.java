@@ -51,7 +51,7 @@ public class MovieListActivity extends BaseActivity implements MovieListGridAdap
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_list);
 
-        AppCenter.start(getApplication(), VS_API_SECRET, Analytics.class, Crashes.class);
+        AppCenter.start(getApplication(), BuildConfig.VS_APP_SECRET, Analytics.class, Crashes.class);
 
         //Load the UI component and Bind with view models
         setupUI();

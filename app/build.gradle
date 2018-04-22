@@ -19,6 +19,7 @@ android {
 
     buildTypes.each{
         it.buildConfigField("String", "MY_MOVIE_DB_API_KEY", "\"${System.env.MY_MOVIE_DB_API_KEY}\"")
+        it.buildConfigField("String", "VS_APP_SECRET", "\"${System.env.VS_APP_SECRET}\"")
     }
 }
 

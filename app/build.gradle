@@ -17,9 +17,9 @@ android {
         }
     }
 
-//    buildTypes.each{
-//        it.buildConfigField 'String', 'MY_MOVIE_DB_API_KEY', "${System.env.API_KEY}"
-//    }
+    buildTypes.each{
+        it.buildConfigField("string", "MY_MOVIE_DB_API_KEY", "${System.env.API_KEY}")
+    }
 }
 
 repositories {

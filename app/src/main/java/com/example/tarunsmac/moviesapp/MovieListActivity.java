@@ -101,7 +101,7 @@ public class MovieListActivity extends BaseActivity implements MovieListGridAdap
 
                 if (currentFilter == MovieFilters.Top_Rated)
                 {
-                    //throw new RuntimeException("This is a crash");
+                    throw new RuntimeException("This is a crash");
                 }
 
                 fetchMovieData();
